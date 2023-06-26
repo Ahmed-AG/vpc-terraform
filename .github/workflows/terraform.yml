@@ -68,8 +68,8 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
 
-    - name: Ping
-      run: ping -c 3 8.8.8.8
+    - name: curl
+      run: curl google.com
 
     # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
     - name: Setup Terraform
