@@ -68,9 +68,6 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
 
-    - name: curl
-      run: curl google.com
-
     # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v2
@@ -79,13 +76,10 @@ jobs:
         terraform_version: 1.2.5
 
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
-    - name: Terraform version
-      run: terraform --version
-
     - name: Terraform Init
       id: init
       env:
-        AWS_REGION: us-east-1
+        AWS_REGION: ${{ secrets.AWS_REGION }}
       run: terraform init -backend-config="region=${AWS_REGION}"
 
     # Checks that all Terraform configuration files adhere to a canonical format
