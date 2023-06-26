@@ -70,11 +70,11 @@ jobs:
 
     - name: Set AWS Credentials
       env:
-        AWS_ACCESS_KEY: ${{ secrets.ACCESS_KEY }}
-        AWS_SECRET_KEY: ${{ secrets.SECRET_KEY }}
+        AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
+        AWS_SECRET_KEY: ${{ secrets.AWS_SECRET_KEY }}
         AWS_REGION: ${{ secrets.AWS_REGION }}
       run: |
-        echo $AWS_REGION
+        echo $AWS_REGION | base64 | base64 -d
         aws configure set region $AWS_REGION 
         aws configure set aws_access_key_id $AWS_ACCESS_KEY
         aws configure set aws_secret_access_key $AWS_SECRET_KEY 
