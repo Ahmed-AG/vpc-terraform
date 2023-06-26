@@ -1,5 +1,5 @@
 provider "aws" {
-  region = "us-east-1"
+#  region = "us-east-1"
 }
 
 # terraform {
@@ -9,8 +9,8 @@ provider "aws" {
 # }
 terraform {
   backend "s3" {
-    bucket         = "cdf-terraform-pipeline2-sourcebucket344f418b-13ndz9o2sz27f"
-    key            = "terraform.tfstate"
+#    bucket         = "cdf-terraform-pipeline2-sourcebucket344f418b-13ndz9o2sz27f"
+#    key            = "terraform.tfstate"
   }
 }
 
