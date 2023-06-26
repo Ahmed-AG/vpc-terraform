@@ -73,8 +73,11 @@ jobs:
         AWS_ACCESS_KEY: ${{ secrets.ACCESS_KEY }}
         AWS_SECRET_KEY: ${{ secrets.SECRET_KEY }}
         AWS_REGION: ${{ secrets.AWS_REGION }}
-      run: aws configure set region $AWS_REGION 
-      #; aws configure set aws_access_key_id $AWS_ACCESS_KEY ; aws configure set aws_secret_access_key $SECRET_KEY 
+      run: |
+        echo $AWS_REGION
+        aws configure set region $AWS_REGION 
+        aws configure set aws_access_key_id $AWS_ACCESS_KEY
+        aws configure set aws_secret_access_key $SECRET_KEY 
 
     - name: Test AWS Credentials
       run: aws sts get-caller-identity
