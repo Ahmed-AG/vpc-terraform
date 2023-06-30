@@ -150,5 +150,34 @@ jobs:
       run: exit 1
 
     - name: Terraform Apply
+      id: apply
       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
       run: terraform apply -auto-approve -input=false
+
+    - uses: actions/github-script@v6
+      if: github.event_name == 'push'
+      env:
+        APPLY: "terraform\n${{ steps.apply.outputs.stdout }}"
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        script: |
+          const output = `#### Terraform Initialization: \`${{ steps.init.outcome }}\`
+
+          #### Terraform Apply \`${{ steps.apply.outcome }}\`
+
+          <details><summary>Show Apply</summary>
+
+          \`\`\`\n
+          ${process.env.APPLY}
+          \`\`\`
+
+          </details>
+
+          *Pushed by: @${{ github.actor }}, Action: \`${{ github.event_name }}\`*`;
+
+          github.rest.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: output
+          })
