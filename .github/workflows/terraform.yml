@@ -152,11 +152,7 @@ jobs:
     - name: Terraform Apply
       id: apply
       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-      run: |
-        # echo ${{context.issue.number}}
-        # echo ${{context.repo.owner}}
-        # echo ${{context.repo.repo}}
-        terraform apply -auto-approve -input=false
+      run: terraform apply -auto-approve -input=false
 
     - uses: actions/github-script@v6
       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
