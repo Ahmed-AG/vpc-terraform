@@ -117,13 +117,11 @@ jobs:
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         script: |
-          const output = `#### Terraform Format and Style 🖌\`${{ steps.fmt.outcome }}\`
-          #### Terraform Initialization ⚙️\`${{ steps.init.outcome }}\`
-          #### Terraform Validation 🤖\`${{ steps.validate.outcome }}\`
+          #### Terraform Initialization: \`${{ steps.init.outcome }}\`
 
-          #### Terraform Plan 📖\`${{ steps.plan.outcome }}\`
+          #### Terraform Plan \`${{ steps.plan.outcome }}\`
 
-          <details><summary>Show Plan1</summary>
+          <details><summary>Show Plan</summary>
 
           \`\`\`\n
           ${process.env.PLAN}
@@ -138,7 +136,7 @@ jobs:
             owner: context.repo.owner,
             repo: context.repo.repo,
             body: output
-          })            
+          })
 
       # On push to "main", build or change infrastructure according to Terraform configuration files
       # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
