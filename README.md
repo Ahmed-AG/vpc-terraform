@@ -22,3 +22,4 @@ https://www.sans.org/blog/aws-network-firewall-more-than-just-layer-4/
 
 https://aws.amazon.com/blogs/networking-and-content-delivery/deployment-models-for-aws-network-firewall/
 1
+Fri Jun 30 06:48:22 CDT 2023
